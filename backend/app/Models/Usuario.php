@@ -9,7 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Usuario extends Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class Usuario extends Authenticatable implements JWTSubject
 {
     use HasFactory, HasApiTokens, Notifiable;
 
@@ -26,4 +28,12 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+ 
+    public function getJWTCustomClaims() {
+        return [];
+    }
 }

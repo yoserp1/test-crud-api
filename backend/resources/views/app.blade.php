@@ -13,15 +13,11 @@
     {{-- This'll load our extracted and hashed CSS assets here --}}
     @env('production')
         @if (isset($ngAssets) && count($ngAssets))
-            <link rel="stylesheet" href="/build/{{ $ngAssets['styles'] }}">
+            <link rel="stylesheet" href="{{ asset('/build/'. $ngAssets['styles']) }}">
         @endif
     @endenv
   </head>
   <body>
-    @if (Route::has('login')) @auth
-    <a href="{{ url('/home') }}">Home</a> @else
-    <a href="{{ route('login') }}">Login</a>
-    <a href="{{ route('register') }}">Register</a> @endauth @endif
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
@@ -30,9 +26,9 @@
     {{-- This'll load our hashed assets when in production --}}
     @env('production')
         @if (isset($ngAssets) && count($ngAssets))
-            <script src="/build/{{ $ngAssets['runtime'] }}" type="module"></script>
-            <script src="/build/{{ $ngAssets['polyfills'] }}" type="module"></script>
-            <script src="/build/{{ $ngAssets['main'] }}" type="module"></script>
+            <script src="{{ asset('/build/'. $ngAssets['runtime']) }}" type="module"></script>
+            <script src="{{ asset('/build/'. $ngAssets['polyfills']) }}" type="module"></script>
+            <script src="{{ asset('/build/'. $ngAssets['main']) }}" type="module"></script>
         @endif
     {{-- This'll load the development assets when in dev mode --}}
     @else
