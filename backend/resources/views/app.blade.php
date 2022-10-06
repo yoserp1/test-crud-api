@@ -30,17 +30,17 @@
     {{-- This'll load our hashed assets when in production --}}
     @env('production')
         @if (isset($ngAssets) && count($ngAssets))
-            <script src="/build/{{ $ngAssets['runtime'] }}" defer></script>
-            <script src="/build/{{ $ngAssets['polyfills'] }}" defer></script>
-            <script src="/build/{{ $ngAssets['main'] }}" defer></script>
+            <script src="/build/{{ $ngAssets['runtime'] }}" type="module"></script>
+            <script src="/build/{{ $ngAssets['polyfills'] }}" type="module"></script>
+            <script src="/build/{{ $ngAssets['main'] }}" type="module"></script>
         @endif
     {{-- This'll load the development assets when in dev mode --}}
     @else
-        <script src="/build/runtime.js" defer></script>
-        <script src="/build/polyfills.js" defer></script>
+        <script src="/build/runtime.js" type="module"></script>
+        <script src="/build/polyfills.js" type="module"></script>
         <script src="/build/styles.js" defer></script>
-        <script src="/build/vendor.js" defer></script>
-        <script src="/build/main.js" defer></script>
+        <script src="/build/vendor.js" type="module"></script>
+        <script src="/build/main.js" type="module"></script>
     @endenv
   </body>
 </html>
