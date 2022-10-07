@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CustomValidators } from '../../shared/custom-validators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -11,18 +13,23 @@ import { CustomValidators } from '../../shared/custom-validators';
 })
 export class RegistroComponent implements OnInit {
 
+  @ViewChild('successModal') successModal!: TemplateRef<any>;
+
   form: FormGroup;
   errors:any = null;
+  message:any = null;
 
   constructor(
     public router: Router,
     public fb: FormBuilder,
+    public _authService: AuthService,
+    private _modal: NgbModal
   ) {
     this.form = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]),
       email: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(8)]),
+      password_confirmation: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(8)]),
       address: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]),
       birthdate: new FormControl('', []),
       city: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]),
@@ -46,8 +53,8 @@ export class RegistroComponent implements OnInit {
     return this.form.get('password');
   }
 
-  get confirmPassword() {
-    return this.form.get('confirmPassword');
+  get password_confirmation() {
+    return this.form.get('password_confirmation');
   }
 
   get address() {
@@ -62,8 +69,21 @@ export class RegistroComponent implements OnInit {
     return this.form.get('city');
   }
 
-  onSubmit() {
-
+  async onSubmit() {
+    await this._authService.registro(this.form.value).subscribe(
+      (result) => {
+        console.log(result);
+        this.message = result.message;
+      },
+      (error) => {
+        this.errors = error.error;
+      },
+      () => {
+        this._modal.open(this.successModal, { centered: true, backdrop: false });
+        this.form.reset();
+        this.router.navigate(['/']);
+      }
+    );
   }
 
 }

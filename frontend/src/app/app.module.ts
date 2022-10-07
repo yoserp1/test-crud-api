@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
+    NgbModule,
   ],
   exports: [
     CommonModule,

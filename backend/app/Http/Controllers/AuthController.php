@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Validator;
+use App\Models\Usuario;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
         }
 
         if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Las credenciales que has introducido no coinciden con nuestros registros. Intente de Nuevo.'], 401);
         }
 
         return $this->createNewToken($token);
@@ -37,13 +38,16 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:usuario',
             'password' => 'required|string|confirmed|min:6',
+            'address' => 'required|string|max:255',
+            'birthdate' => 'required|date_format:Y-m-d',
+            'city' => 'required|string|max:255',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json($validator->errors(), 422);
         }
 
-        $user = User::create(array_merge(
+        $user = Usuario::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));

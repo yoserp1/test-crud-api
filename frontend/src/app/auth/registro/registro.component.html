@@ -11,6 +11,9 @@
                             <h1 class="h4 text-gray-900 mb-4">Registrarme!</h1>
                         </div>
                         <form class="user" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+                            <div *ngIf="errors?.error" class="alert alert-danger mt-3">
+                              {{ errors?.error }}
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                     <input type="text" formControlName="name" class="form-control form-control-user" placeholder="Ingrese nombre">
@@ -22,6 +25,9 @@
                                     </div>
                                     <div class="text-danger" *ngIf="name?.errors?.['maxLength']">
                                         <small>Debe tener como mínimo 255 caracteres</small>
+                                    </div>
+                                    <div *ngIf="errors?.name" class="text-danger">
+                                      <small>{{ errors?.name }}</small>
                                     </div>
                                 </div>
                             </div>
@@ -39,6 +45,9 @@
                                 <div class="text-danger" *ngIf="email?.errors?.['maxLength']">
                                     <small>Debe tener como mínimo 255 caracteres</small>
                                 </div>
+                                <div *ngIf="errors?.email" class="text-danger">
+                                  <small>{{ errors?.email }}</small>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -52,20 +61,26 @@
                                     <div class="text-danger" *ngIf="password?.errors?.['maxLength']">
                                         <small>Debe tener como mínimo 255 caracteres</small>
                                     </div>
+                                    <div *ngIf="errors?.password" class="text-danger">
+                                      <small>{{ errors?.password }}</small>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" formControlName="confirmPassword" class="form-control form-control-user" placeholder="Repita contraseña">
-                                    <div class="text-danger" *ngIf="form?.get('confirmPassword')?.hasError('not_matching')">
+                                    <input type="password" formControlName="password_confirmation" class="form-control form-control-user" placeholder="Repita contraseña">
+                                    <div class="text-danger" *ngIf="form?.get('password_confirmation')?.hasError('not_matching')">
                                         <small>Confirmar contraseña no coincide!</small>
                                     </div>
-                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['required'] && (confirmPassword?.dirty || confirmPassword?.touched)">
+                                    <div class="text-danger" *ngIf="password_confirmation?.errors?.['required'] && (password_confirmation?.dirty || password_confirmation?.touched)">
                                         <small>Campo requerido</small>
                                     </div>
-                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['minLength']">
+                                    <div class="text-danger" *ngIf="password_confirmation?.errors?.['minLength']">
                                         <small>Debe tener como mínimo 3 caracteres</small>
                                     </div>
-                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['maxLength']">
+                                    <div class="text-danger" *ngIf="password_confirmation?.errors?.['maxLength']">
                                         <small>Debe tener como mínimo 255 caracteres</small>
+                                    </div>
+                                    <div *ngIf="errors?.password_confirmation" class="text-danger">
+                                      <small>{{ errors?.password_confirmation }}</small>
                                     </div>
                                 </div>
                             </div>
@@ -80,12 +95,18 @@
                                 <div class="text-danger" *ngIf="address?.errors?.['maxLength']">
                                     <small>Debe tener como mínimo 255 caracteres</small>
                                 </div>
+                                <div *ngIf="errors?.address" class="text-danger">
+                                  <small>{{ errors?.address }}</small>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <input type="date" formControlName="birthdate" class="form-control form-control-user" placeholder="Ingrese fecha de nacimiento">
                                     <div class="text-danger" *ngIf="birthdate?.errors?.['required'] && (birthdate?.dirty || birthdate?.touched)">
                                         <small>Campo requerido</small>
+                                    </div>
+                                    <div *ngIf="errors?.birthdate" class="text-danger">
+                                      <small>{{ errors?.birthdate }}</small>
                                     </div>
                                 </div>
                             </div>
@@ -100,6 +121,9 @@
                                 <div class="text-danger" *ngIf="city?.errors?.['maxLength']">
                                     <small>Debe tener como mínimo 255 caracteres</small>
                                 </div>
+                                <div *ngIf="errors?.city" class="text-danger">
+                                  <small>{{ errors?.city }}</small>
+                                </div>
                             </div>
                             <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-user btn-block">Registrarme</button>
                         </form>
@@ -112,5 +136,19 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<ng-template #successModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Informacion</h4>
+    <button type="button" class="btn-close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="text-primary h6">{{ message }}</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Cerrar</button>
+  </div>
+</ng-template>
