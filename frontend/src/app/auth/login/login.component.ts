@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
+import { TokenService } from '../../shared/services/token.service';
+import { AuthStateService } from '../../shared/services/auth-state.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,8 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public fb: FormBuilder,
     public _authService: AuthService,
+    private _token: TokenService,
+    private _authState: AuthStateService
   ) {
     this.form = this.fb.group({
       email: new FormControl('', Validators.required),
@@ -39,16 +43,22 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     await this._authService.login(this.form.value).subscribe(
       (result) => {
-        console.log(result);
+        this.responseHandler(result);
       },
       (error) => {
         this.errors = error.error;
       },
       () => {
+        this._authState.setAuthState(true);
         this.form.reset();
-        this.router.navigate(['inicio']);
+        this.router.navigate(['perfil']);
       }
     );
   }
+
+    // Handle response
+    responseHandler(data:any) {
+      this._token.handleData(data.access_token);
+    }
 
 }

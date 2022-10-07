@@ -26,4 +26,8 @@ export class AuthService {
   registro(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.endpoint + '/register', usuario);
   }
+
+  perfil(): Observable<any> {
+    return this.http.get(this.endpoint + '/profile');
+  }
 }
