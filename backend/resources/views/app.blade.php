@@ -29,6 +29,7 @@
         @if (isset($ngAssets) && count($ngAssets))
             <script src="{{ asset('/build/'. $ngAssets['runtime']) }}" type="module"></script>
             <script src="{{ asset('/build/'. $ngAssets['polyfills']) }}" type="module"></script>
+            <script src="{{ asset('/build/'. $ngAssets['scripts']) }}" type="module"></script>
             <script src="{{ asset('/build/'. $ngAssets['main']) }}" type="module"></script>
         @endif
     {{-- This'll load the development assets when in dev mode --}}
