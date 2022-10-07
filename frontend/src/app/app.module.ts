@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,13 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     FormsModule,
     AppRoutingModule,
     NgbModule,
+    SharedModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     {

@@ -74,6 +74,34 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
+    public function update(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|between:2,100',
+            'email' => 'required|string|email|max:100',
+            'address' => 'required|string|max:255',
+            'birthdate' => 'required|date_format:Y-m-d',
+            'city' => 'required|string|max:255',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+
+        $usuario = Usuario::find(auth()->user()->id);
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->address = $request->address;
+        $usuario->birthdate = $request->birthdate;
+        $usuario->city = $request->city;
+        $usuario->save();
+
+        return response()->json([
+            'message' => 'Datos actualizados con éxito!',
+            'user' => $usuario
+        ], 201);
+    }
+
     protected function createNewToken($token){
         return response()->json([
             'access_token' => $token,

@@ -30,4 +30,8 @@ export class AuthService {
   perfil(): Observable<any> {
     return this.http.get(this.endpoint + '/profile');
   }
+
+  actualizar(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.endpoint + '/update', usuario);
+  }
 }
