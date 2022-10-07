@@ -7,7 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: '**', 
+    path: 'personaje',
+    loadChildren: () => import('./personaje/personaje.module').then(m => m.PersonajeModule)
+  },
+  {
+    path: '**',
     pathMatch: 'full',
     redirectTo: ''
   }

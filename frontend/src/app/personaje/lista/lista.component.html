@@ -1,0 +1,56 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  <!-- End of Sidebar -->
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+          <!-- Topbar -->
+          <app-topbar></app-topbar>
+          <!-- End of Topbar -->
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+
+              <!-- Page Heading -->
+              <h1 class="h3 mb-4 text-gray-800">Lista de personajes</h1>
+
+              <div class="row">
+
+                <div class="col-lg-3 mb-4" *ngFor="let item of lista">
+
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">{{ item.name }}</h6>
+                      </div>
+                      <div class="card-body">
+                          <div class="text-center">
+                              <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" [src]="item.image" alt="...">
+                          </div>
+                          <p>{{ item.status }}</p>
+                          <p>Especie: {{ item.species }}</p>
+                          <p>Genero: {{ item.gender }}</p>
+                          <p>Tipo: {{ item.type }}</p>
+                          <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver Detalle &rarr;</a>
+                      </div>
+                  </div>
+
+                </div>
+
+            </div>
+
+          </div>
+          <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+      <!-- End of Footer -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->

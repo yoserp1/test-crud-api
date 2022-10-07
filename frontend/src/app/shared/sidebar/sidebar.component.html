@@ -26,16 +26,17 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Datos:</h6>
-              <a class="collapse-item" routerLink="/perfil">Perfil</a>
+              <a class="collapse-item" [routerLink]="['/perfil']">Perfil</a>
           </div>
       </div>
   </li>
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-      <a class="nav-link" routerLink="/personajes">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Api - Rick and Morthy</span></a>
+      <a class="nav-link" [routerLink]="['/personaje']">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Api - Rick and Morthy</span>
+      </a>
   </li>
 
   <!-- Divider -->
