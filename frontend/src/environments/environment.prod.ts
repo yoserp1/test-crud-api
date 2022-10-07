@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUlr: 'http://localhost:8000'
+  apiUlr: 'https://cryptic-sands-57469.herokuapp.com'
 };
