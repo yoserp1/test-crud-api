@@ -41,7 +41,6 @@ export class DetalleComponent implements OnInit {
 
     this._personajeService.favorito(personaje).subscribe(
       (result) => {
-        console.log(result);
         this.message = result.message;
       },
       (error) => {

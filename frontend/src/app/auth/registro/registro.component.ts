@@ -72,7 +72,6 @@ export class RegistroComponent implements OnInit {
   async onSubmit() {
     await this._authService.registro(this.form.value).subscribe(
       (result) => {
-        console.log(result);
         this.message = result.message;
       },
       (error) => {

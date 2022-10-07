@@ -78,7 +78,6 @@ export class PerfilComponent implements OnInit {
   async onSubmit() {
     await this._authService.actualizar(this.form.value).subscribe(
       (result) => {
-        console.log(result);
         this.message = result.message;
       },
       (error) => {

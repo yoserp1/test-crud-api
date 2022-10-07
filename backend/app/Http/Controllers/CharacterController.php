@@ -43,7 +43,7 @@ class CharacterController extends Controller
         $favorito->save();
 
         return response()->json([
-            'message' => 'Favorito registrado con éxito!',
+            'message' => 'Personaje favorito registrado con éxito!',
             'favorito' => $favorito
         ], 201);
 
