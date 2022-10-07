@@ -34,7 +34,7 @@
                           <p>Especie: {{ item.species }}</p>
                           <p>Genero: {{ item.gender }}</p>
                           <p>Tipo: {{ item.type }}</p>
-                          <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver Detalle &rarr;</a>
+                          <a class="btn btn-secondary btn-block mt-5" [routerLink]="['/personaje/',item.id,'detalle']">Ver Detalle &rarr;</a>
                       </div>
                   </div>
 
