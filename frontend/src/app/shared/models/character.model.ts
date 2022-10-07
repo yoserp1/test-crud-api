@@ -14,4 +14,5 @@ export interface Character {
   location?: Location;
   origin?: Origin;
   episode?: Episode;
+  created?: Date;
 }

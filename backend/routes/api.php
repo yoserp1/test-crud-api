@@ -29,4 +29,5 @@ Route::group([
     Route::post('/update', [AuthController::class, 'update']);
     Route::get('/character', [CharacterController::class, 'list']);
     Route::get('/character/detail/{id}', [CharacterController::class, 'detail']);
+    Route::post('/character/favorite', [CharacterController::class, 'favorite']);
 });

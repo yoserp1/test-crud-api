@@ -1,1 +1,71 @@
-<p>detalle works!</p>
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  <!-- End of Sidebar -->
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+          <!-- Topbar -->
+          <app-topbar></app-topbar>
+          <!-- End of Topbar -->
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-4 text-gray-800">{{ personaje?.name }}</h1>
+
+            <div class="row">
+
+              <div class="col-lg-12">
+
+                  <!-- Circle Buttons -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Informacion</h6>
+                      </div>
+                      <div class="card-body">
+                        <div class="text-center">
+                          <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" [src]="personaje?.image" alt="...">
+                        </div>
+                        <p>{{ personaje?.status }}</p>
+                        <p>Especie: {{ personaje?.species }}</p>
+                        <p>Genero: {{ personaje?.gender }}</p>
+                        <p>Tipo: {{ personaje?.type }}</p>
+                        <p>Creacion: {{ personaje?.created | date }}</p>
+                        <button class="btn btn-warning btn-block" (click)="favorito(personaje)">Marcar como favorito</button>
+                        <button class="btn btn-secondary btn-block" (click)="regresar()">Regresar</button>
+                      </div>
+                  </div>
+
+                </div>
+
+          </div>
+          <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+      <!-- End of Footer -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<ng-template #successModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Informacion</h4>
+    <button type="button" class="btn-close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="text-primary h6">{{ message }}</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Cerrar</button>
+  </div>
+</ng-template>
