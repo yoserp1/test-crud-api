@@ -3,6 +3,6 @@ Realizar una plataforma en la cual se puedan registrar y logear usuarios, estos 
 
 # Pila tecnológica utilizada
 * PHP 8
-* Laravel
+* Laravel 8
 * MariaDB
 * Angular 14
