@@ -9,14 +9,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+  form: FormGroup;
   errors:any = null;
 
   constructor(
     public router: Router,
     public fb: FormBuilder,
   ) { 
-    this.loginForm = this.fb.group({
+    this.form = this.fb.group({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.form.get('email');
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.form.get('password');
   }
 
   onSubmit() {

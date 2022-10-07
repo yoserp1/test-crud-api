@@ -10,32 +10,98 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Registrarme!</h1>
                         </div>
-                        <form class="user">
+                        <form class="user" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
                             <div class="form-group row">
                                 <div class="col-sm-12 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" placeholder="Ingrese nombre">
+                                    <input type="text" formControlName="name" class="form-control form-control-user" placeholder="Ingrese nombre">
+                                    <div class="text-danger" *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)">
+                                        <small>Campo requerido</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="name?.errors?.['minLength']">
+                                        <small>Debe tener como mínimo 1 caracteres</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="name?.errors?.['maxLength']">
+                                        <small>Debe tener como mínimo 255 caracteres</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" placeholder="Ingrese e-mail">
+                                <input type="email" formControlName="email" class="form-control form-control-user" placeholder="Ingrese e-mail">
+                                <div class="text-danger" *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)">
+                                    <small>Campo requerido</small>
+                                </div>
+                                <div class="text-danger" *ngIf="email?.errors?.['email'] && (email?.dirty || email?.touched)">
+                                    <small>Formato no valido</small>
+                                </div>
+                                <div class="text-danger" *ngIf="email?.errors?.['minLength']">
+                                    <small>Debe tener como mínimo 4 caracteres</small>
+                                </div>
+                                <div class="text-danger" *ngIf="email?.errors?.['maxLength']">
+                                    <small>Debe tener como mínimo 255 caracteres</small>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" placeholder="Contraseña">
+                                    <input type="password" formControlName="password" class="form-control form-control-user" placeholder="Contraseña">
+                                    <div class="text-danger" *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)">
+                                        <small>Campo requerido</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="password?.errors?.['minLength']">
+                                        <small>Debe tener como mínimo 3 caracteres</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="password?.errors?.['maxLength']">
+                                        <small>Debe tener como mínimo 255 caracteres</small>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" placeholder="Repita contraseña">
+                                    <input type="password" formControlName="confirmPassword" class="form-control form-control-user" placeholder="Repita contraseña">
+                                    <div class="text-danger" *ngIf="form?.get('confirmPassword')?.hasError('not_matching')">
+                                        <small>Confirmar contraseña no coincide!</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['required'] && (confirmPassword?.dirty || confirmPassword?.touched)">
+                                        <small>Campo requerido</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['minLength']">
+                                        <small>Debe tener como mínimo 3 caracteres</small>
+                                    </div>
+                                    <div class="text-danger" *ngIf="confirmPassword?.errors?.['maxLength']">
+                                        <small>Debe tener como mínimo 255 caracteres</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" placeholder="Ingrese direccion">
+                                <input type="text" formControlName="address" class="form-control form-control-user" placeholder="Ingrese direccion">
+                                <div class="text-danger" *ngIf="address?.errors?.['required'] && (address?.dirty || address?.touched)">
+                                    <small>Campo requerido</small>
+                                </div>
+                                <div class="text-danger" *ngIf="address?.errors?.['minLength']">
+                                    <small>Debe tener como mínimo 1 caracteres</small>
+                                </div>
+                                <div class="text-danger" *ngIf="address?.errors?.['maxLength']">
+                                    <small>Debe tener como mínimo 255 caracteres</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input type="date" formControlName="birthdate" class="form-control form-control-user" placeholder="Ingrese fecha de nacimiento">
+                                    <div class="text-danger" *ngIf="birthdate?.errors?.['required'] && (birthdate?.dirty || birthdate?.touched)">
+                                        <small>Campo requerido</small>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" placeholder="Ingrese ciudad">
+                                <input type="text" formControlName="city" class="form-control form-control-user" placeholder="Ingrese ciudad">
+                                <div class="text-danger" *ngIf="city?.errors?.['required'] && (city?.dirty || city?.touched)">
+                                    <small>Campo requerido</small>
+                                </div>
+                                <div class="text-danger" *ngIf="city?.errors?.['minLength']">
+                                    <small>Debe tener como mínimo 1 caracteres</small>
+                                </div>
+                                <div class="text-danger" *ngIf="city?.errors?.['maxLength']">
+                                    <small>Debe tener como mínimo 255 caracteres</small>
+                                </div>
                             </div>
-                            <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                Registrarme
-                            </a>
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-user btn-block">Registrarme</button>
                         </form>
                         <hr>
                         <div class="text-center">
