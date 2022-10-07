@@ -6,3 +6,6 @@ Realizar una plataforma en la cual se puedan registrar y logear usuarios, estos 
 * Laravel 8
 * MariaDB
 * Angular 14
+* Typescrip
+* Javascrip
+* SCSS
